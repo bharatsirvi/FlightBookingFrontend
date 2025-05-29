@@ -4,13 +4,13 @@ import { faqs } from "../utils/constants";
 
 function Body() {
   const [faqQuery, setFaqQuery] = useState("");
-  const chatRef = useRef(null); // Step 1: Create the ref
+  const chatRef = useRef(null); 
 
   const handleFaqClick = (question) => {
     setFaqQuery(question);
     setTimeout(() => {
       chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100); // Short delay ensures ChatWindow receives the updated props
+    }, 100);
   };
 
   return (
@@ -21,8 +21,7 @@ function Body() {
         <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-indigo-200 rounded-full opacity-10 animate-bounce delay-500"></div>
       </div>
 
-      <div className="relative z-10 p-6 sm:p-8 lg:p-12">
-        {/* Header */}
+      <div className="relative z-10 p-6 sm:p-8 lg:p-12" ref={chatRef}>
         <div className="text-center mb-12 space-y-4">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-2xl shadow-lg mb-6 transform hover:scale-105 transition-all duration-300">
             <span className="text-3xl">✈️</span>
@@ -36,14 +35,13 @@ function Body() {
           </p>
         </div>
 
-        {/* Main content */}
         <div className="max-w-6xl mx-auto">
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 blur-sm"></div>
 
             <div
               className="relative bg-white/80 backdrop-blur-xl shadow-2xl rounded-3xl border border-white/20 overflow-hidden"
-              ref={chatRef}
+              
             >
               <div className="h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
 
@@ -91,9 +89,7 @@ function Body() {
             </div>
           </div>
 
-          {/* FAQ section */}
           <div className="mt-20 max-w-6xl mx-auto px-6">
-            {/* Header with enhanced styling */}
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Frequently Asked Questions
@@ -104,7 +100,6 @@ function Body() {
               </p>
             </div>
 
-            {/* FAQ Grid with modern styling */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {faqs.map((question, idx) => (
                 <button
@@ -112,21 +107,17 @@ function Body() {
                   onClick={() => handleFaqClick(question)}
                   className="cursor-pointer group relative text-left p-6 bg-gradient-to-br from-white to-gray-50/50 hover:from-blue-50 hover:to-purple-50 rounded-2xl border border-gray-200/60 hover:border-blue-300/60 shadow-lg hover:shadow-2xl transition-all  duration-500 transform hover:-translate-y-2 hover:scale-105"
                 >
-                  {/* Background glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                  {/* Question mark icon */}
                   <div className="absolute bottom-4 right-4 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold opacity-20 group-hover:opacity-100 transition-opacity duration-300">
                     ?
                   </div>
 
-                  {/* Question text */}
                   <div className="relative z-10">
                     <p className="text-gray-800 group-hover:text-gray-900 font-semibold text-base leading-relaxed transition-colors duration-300">
                       {question}
                     </p>
 
-                    {/* Hover indicator */}
                     <div className="mt-4 flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
                       <span className="text-sm font-medium">
                         Ask this question
@@ -146,8 +137,6 @@ function Body() {
                       </svg>
                     </div>
                   </div>
-
-                  {/* Bottom gradient accent */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               ))}

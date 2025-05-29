@@ -11,11 +11,11 @@ export default function TableRenderer({ response }) {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-gradient-to-r from-slate-800 to-slate-900">
+              <tr className="bg-gradient-to-r from-blue-400 to-purple-400">
                 {response.columns.map((col, index) => (
                   <th
                     key={index}
-                    className="px-6 py-4 text-left text-sm font-semibold text-white tracking-wider uppercase border-r border-slate-700 last:border-r-0"
+                    className="px-6 py-4 text-left text-sm font-semibold text-white tracking-wider uppercase border-r border-white last:border-r-0"
                   >
                     {col}
                   </th>
@@ -47,7 +47,6 @@ export default function TableRenderer({ response }) {
           </table>
         </div>
 
-        {/* Modern accent border */}
         <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
       </div>
     </div>

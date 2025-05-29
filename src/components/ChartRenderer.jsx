@@ -17,9 +17,9 @@ export default function ChartRenderer({ response }) {
   let chartOptions;
 
   if (response.chartType === "pie") {
-    const pieData = (response.xAxis || []).map((name, i) => ({
-      name,
-      y: response.series?.[0]?.data?.[i] || 0,
+    const pieData = (response?.series[0]?.data || []).map((item) => ({
+      name: item[0],
+      y: item[1],
     }));
 
     chartOptions = {
@@ -97,7 +97,7 @@ export default function ChartRenderer({ response }) {
   } else {
     chartOptions = {
       chart: {
-        type: response.chartType || "column",
+        type: response.chartType || "bar",
         backgroundColor: "transparent",
         style: {
           fontFamily:
@@ -247,7 +247,6 @@ export default function ChartRenderer({ response }) {
           }}
         />
 
-        {/* Modern accent border */}
         <div className="mt-6 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
       </div>
     </div>

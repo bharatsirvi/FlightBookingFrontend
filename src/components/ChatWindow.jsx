@@ -3,41 +3,42 @@ import ChatInput from "./ChatInput";
 import ChartRenderer from "./ChartRenderer";
 import TableRenderer from "./TableRenderer";
 import { BASE_URL } from "../utils/constants";
-import { useEffect, useState } from "react";
+import usePollingState from "../hooks/usePollingState";
+import { useEffect } from "react";
 
 export default function ChatWindow({ faqQuery }) {
-  const [response, setResponse] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSend = async (query) => {
-    setLoading(true);
-    setError("");
-    setResponse(null);
-    try {
-      const response = await axios.post(
+  const apiCall = async (query) => {
+      const res = await axios.post(
         `${BASE_URL}/api/query`,
         { query },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
-      setResponse(response.data);
-    } catch (error) {
-      console.error("Error fetching response:", error);
-      setError(
-        "Sorry, I couldn't find an answer. Please try again with a different query and make sure the query is valid."
-      );
-    } finally {
-      setLoading(false);
+      return res.data;
     }
+  const {
+    data: response,
+    loading,
+    error,
+    poll: pollResponse,
+    cancel,
+  } = usePollingState({
+    fetcher: apiCall,
+  });
+  
+  console.log("ChatWindow response:", response);
+  const handleSend = (query) => {
+    pollResponse(query);
   };
+
+  useEffect(() => {
+    return () => {
+      cancel(); 
+    };
+  }, [cancel]);
 
   return (
     <div className="p-2">
-      {/* Floating background elements */}
       <div className="fixed inset-0 overflow-scroll pointer-events-none opacity-40">
         <div className="absolute top-20 left-10 w-64 h-64 bg-blue-300 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-300 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -45,16 +46,12 @@ export default function ChatWindow({ faqQuery }) {
       </div>
 
       <div className="relative max-w-5xl mx-auto pt-8">
-        {/* Main container with improved styling */}
-
-        {/* Content area */}
         <div>
           <ChatInput onSend={handleSend} faqQuery={faqQuery} />
 
           {loading && (
             <div className="flex items-center justify-center mt-8 py-12">
               <div className="relative">
-                {/* Enhanced loading animation */}
                 <div className="w-20 h-20 relative">
                   <div className="absolute inset-0 border-4 border-blue-200 rounded-full"></div>
                   <div className="absolute inset-0 border-4 border-transparent border-t-blue-600 rounded-full animate-spin"></div>
@@ -99,7 +96,7 @@ export default function ChatWindow({ faqQuery }) {
                     <h3 className="text-lg font-semibold text-red-800 mb-1">
                       Something went wrong
                     </h3>
-                    <p className="text-red-700 leading-relaxed">{error}</p>
+                    <p className="text-red-900 leading-relaxed">{error}</p>
                   </div>
                 </div>
               </div>
@@ -143,12 +140,11 @@ export default function ChatWindow({ faqQuery }) {
           )}
 
           {response?.type === "table" && (
-           <div className="mt-8 relative">
+            <div className="mt-8 relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-2xl blur-sm"></div>
               <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200/50 rounded-2xl p-6 shadow-lg backdrop-blur-sm">
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
-                    
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"

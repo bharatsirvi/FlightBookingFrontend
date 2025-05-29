@@ -15,17 +15,14 @@ export default function ChatInput({ onSend, faqQuery }) {
     e.preventDefault();
     if (query.trim()) {
       onSend(query);
-      setQuery("");
     }
   };
 
   return (
     <div className="relative w-full max-w-4xl mx-auto">
-      {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur-xl opacity-60 animate-pulse"></div>
 
       <div onSubmit={handleSubmit} className="relative">
-        {/* Main input container */}
         <div
           className={`
           relative bg-white/90 backdrop-blur-lg border border-gray-200/50 rounded-2xl 
@@ -37,7 +34,6 @@ export default function ChatInput({ onSend, faqQuery }) {
           }
         `}
         >
-          {/* Sparkle icon */}
           <div className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400">
             <Sparkles
               size={20}
@@ -47,7 +43,6 @@ export default function ChatInput({ onSend, faqQuery }) {
             />
           </div>
 
-          {/* Input field */}
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -60,10 +55,8 @@ export default function ChatInput({ onSend, faqQuery }) {
               font-medium tracking-wide
             "
             placeholder="Ask me anything about flight bookings..."
-          
           />
 
-          {/* Submit button */}
           <button
             type="button"
             onClick={handleSubmit}
@@ -89,7 +82,6 @@ export default function ChatInput({ onSend, faqQuery }) {
         </div>
       </div>
 
-      {/* Bottom glow effect */}
       <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 blur-2xl opacity-40"></div>
     </div>
   );
