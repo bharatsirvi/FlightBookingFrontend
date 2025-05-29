@@ -1,4 +1,6 @@
-export const BASE_URL = " http://127.0.0.1:8000";
+// export const BASE_URL = "http://127.0.0.1:8000";
+export const BASE_URL = "https://flightbookingbackend-3.onrender.com";
+
 export const faqs = [
   "Display top 5 performing airlines",
   "Which airline has the most flights listed?",

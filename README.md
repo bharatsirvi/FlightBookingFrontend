@@ -1,3 +1,15 @@
+## 🌐 Deployment
+
+The full stack Flight Booking Analytics application is deployed and live at:
+
+**Frontend:**  
+[Vercel Deployment](https://flight-booking-frontend-drab.vercel.app/)
+
+**Backend:**  
+(Example) [https://flightbookingbackend-3.onrender.com](https://flightbookingbackend-3.onrender.com)
+
+---
+
 # Flight Booking Frontend
 
 This is the React + Vite frontend for the Flight Booking Analytics project.

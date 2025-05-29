@@ -8,14 +8,6 @@ import { useEffect } from "react";
 
 export default function ChatWindow({ faqQuery }) {
 
-  const apiCall = async (query) => {
-      const res = await axios.post(
-        `${BASE_URL}/api/query`,
-        { query },
-        { headers: { "Content-Type": "application/json" } }
-      );
-      return res.data;
-    }
   const {
     data: response,
     loading,
@@ -23,9 +15,16 @@ export default function ChatWindow({ faqQuery }) {
     poll: pollResponse,
     cancel,
   } = usePollingState({
-    fetcher: apiCall,
+    fetcher: async (query) => {
+      const res = await axios.post(
+        `${BASE_URL}/api/query`,
+        { query },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return res.data;
+    },
   });
-  
+
   console.log("ChatWindow response:", response);
   const handleSend = (query) => {
     pollResponse(query);
@@ -33,7 +32,7 @@ export default function ChatWindow({ faqQuery }) {
 
   useEffect(() => {
     return () => {
-      cancel(); 
+      cancel();
     };
   }, [cancel]);
 
