@@ -1,12 +1,75 @@
-# React + Vite
+# Flight Booking Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the React + Vite frontend for the Flight Booking Analytics project.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- Modern React app bootstrapped with Vite
+- Connects to a FastAPI backend for flight analytics
+- Uses custom hooks and components for chat, charts, and tables
+- Supports async API polling and error handling
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Setup Instructions
+
+### 1. **Navigate to the frontend folder**
+
+```sh
+cd flight_booking_frontend
+```
+
+### 2. **Install dependencies**
+
+```sh
+npm install
+```
+
+### 3. **Start the development server**
+
+```sh
+npm run dev
+```
+
+- The app will start at [http://localhost:5173](http://localhost:5173) by default.
+- Make sure your backend server is running at [http://127.0.0.1:8000](http://127.0.0.1:8000).
+- If needed, update the backend URL in `src/utils/constants.js`.
+
+
+## 📁 Project Structure
+
+```
+flight_booking_frontend/
+│
+├── src/
+│   ├── components/
+│   │   ├── Body.jsx 
+│   │   ├── ChatWindow.jsx
+│   │   ├── ChartRenderer.jsx
+│   │   ├── ChatInput.jsx 
+│   │   └── TableRenderer.jsx
+│   ├── hooks/
+│   │   └── usePollingState.js
+│   ├── utils/
+│   │   └── constants.js
+│   ├── App.jsx
+│   └── main.jsx
+├── public/
+│   └── flightLogo.png
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## 📝 Notes
+
+- This project uses [Vite](https://vitejs.dev/) for fast development.
+- Tailwind CSS is used (see `src/index.css`).
+- For API calls, the frontend expects the backend to be running locally.
+- For any issues, check the browser console or terminal output.
+
+---
+
+**Enjoy your flight booking analytics frontend!**
